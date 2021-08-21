@@ -10,10 +10,12 @@ export default (req, res) => {
 		posts = require("../../cache/data").posts;
 	} else {
 		const files = fs.readdirSync(path.join("posts"));
+
 		posts = files.map((filename) => {
 			const slug = filename.replace(".md", "");
 
 			const markdownWithMeta = fs.readFileSync(path.join("posts", filename), "utf-8");
+
 			const { data: frontmatter } = matter(markdownWithMeta);
 
 			return {
